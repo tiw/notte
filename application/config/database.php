@@ -61,40 +61,40 @@ return array(
 
     'connections' => array(
 
-    	'sqlite' => array(
-    		'driver'   => 'sqlite',
-    		'database' => 'application',
-    		'prefix'   => '',
-    	),
+        'sqlite' => array(
+                'driver'   => 'sqlite',
+                'database' => 'application',
+                'prefix'   => '',
+        ),
 
-    	'mysql' => array(
-    		'driver'   => 'mysql',
-    		'host'     => 'localhost',
-    		'database' => 'database',
-    		'username' => 'root',
-    		'password' => '',
-    		'charset'  => 'utf8',
-    		'prefix'   => '',
-    	),
+        'mysql' => array(
+                'driver'   => 'mysql',
+                'host'     => 'localhost',
+                'database' => 'notte',
+                'username' => 'root',
+                'password' => 'root',
+                'charset'  => 'utf8',
+                'prefix'   => '',
+        ),
 
-    	'pgsql' => array(
-    		'driver'   => 'pgsql',
-    		'host'     => 'localhost',
-    		'database' => 'database',
-    		'username' => 'root',
-    		'password' => '',
-    		'charset'  => 'utf8',
-    		'prefix'   => '',
-    	),
+        'pgsql' => array(
+                'driver'   => 'pgsql',
+                'host'     => 'localhost',
+                'database' => 'database',
+                'username' => 'root',
+                'password' => '',
+                'charset'  => 'utf8',
+                'prefix'   => '',
+        ),
 
-    	'sqlsrv' => array(
-    		'driver'   => 'sqlsrv',
-    		'host'     => 'localhost',
-    		'database' => 'database',
-    		'username' => 'root',
-    		'password' => '',
-    		'prefix'   => '',
-    	),
+        'sqlsrv' => array(
+                'driver'   => 'sqlsrv',
+                'host'     => 'localhost',
+                'database' => 'database',
+                'username' => 'root',
+                'password' => '',
+                'prefix'   => '',
+        ),
 
     ),
 
@@ -113,11 +113,11 @@ return array(
 
     'redis' => array(
 
-    	'default' => array(
-    		'host'     => '127.0.0.1',
-    		'port'     => 6379,
-    		'database' => 0
-    	),
+        'default' => array(
+                'host'     => '127.0.0.1',
+                'port'     => 6379,
+                'database' => 0
+        ),
 
     ),
 
