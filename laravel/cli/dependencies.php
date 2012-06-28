@@ -8,14 +8,14 @@
  */
 if(! IoC::registered('task: migrate'))
 {
-	IoC::register('task: migrate', function()
-	{
-		$database = new Tasks\Migrate\Database;
+    IoC::register('task: migrate', function()
+    {
+    	$database = new Tasks\Migrate\Database;
 
-		$resolver = new Tasks\Migrate\Resolver($database);
+    	$resolver = new Tasks\Migrate\Resolver($database);
 
-		return new Tasks\Migrate\Migrator($resolver, $database);
-	});	
+    	return new Tasks\Migrate\Migrator($resolver, $database);
+    });	
 }
 
 
@@ -26,12 +26,12 @@ if(! IoC::registered('task: migrate'))
  */
 if(! IoC::registered('task: bundle'))
 {
-	IoC::register('task: bundle', function()
-	{
-		$repository = IoC::resolve('bundle.repository');
+    IoC::register('task: bundle', function()
+    {
+    	$repository = IoC::resolve('bundle.repository');
 
-		return new Tasks\Bundle\Bundler($repository);
-	});
+    	return new Tasks\Bundle\Bundler($repository);
+    });
 }
 
 /**
@@ -41,10 +41,10 @@ if(! IoC::registered('task: bundle'))
  */
 if(! IoC::registered('task: key'))
 {
-	IoC::singleton('task: key', function()
-	{
-		return new Tasks\Key;
-	});
+    IoC::singleton('task: key', function()
+    {
+    	return new Tasks\Key;
+    });
 }
 
 /**
@@ -55,10 +55,10 @@ if(! IoC::registered('task: key'))
  */
 if(! IoC::registered('task: session'))
 {
-	IoC::singleton('task: session', function()
-	{
-		return new Tasks\Session\Manager;
-	});
+    IoC::singleton('task: session', function()
+    {
+    	return new Tasks\Session\Manager;
+    });
 }
 
 /**
@@ -68,10 +68,10 @@ if(! IoC::registered('task: session'))
  */
 if(! IoC::registered('task: route'))
 {
-	IoC::singleton('task: route', function()
-	{
-		return new Tasks\Route;
-	});
+    IoC::singleton('task: route', function()
+    {
+    	return new Tasks\Route;
+    });
 }
 
 /**
@@ -81,10 +81,10 @@ if(! IoC::registered('task: route'))
  */
 if(! IoC::registered('task: test'))
 {
-	IoC::singleton('task: test', function()
-	{
-		return new Tasks\Test\Runner;
-	});
+    IoC::singleton('task: test', function()
+    {
+    	return new Tasks\Test\Runner;
+    });
 }
 
 /**
@@ -94,10 +94,10 @@ if(! IoC::registered('task: test'))
  */
 if(! IoC::registered('bundle.repository'))
 {
-	IoC::singleton('bundle.repository', function()
-	{
-		return new Tasks\Bundle\Repository;
-	});
+    IoC::singleton('bundle.repository', function()
+    {
+    	return new Tasks\Bundle\Repository;
+    });
 }
 
 /**
@@ -107,10 +107,10 @@ if(! IoC::registered('bundle.repository'))
  */
 if(! IoC::registered('bundle.publisher'))
 {
-	IoC::singleton('bundle.publisher', function()
-	{
-		return new Tasks\Bundle\Publisher;
-	});
+    IoC::singleton('bundle.publisher', function()
+    {
+    	return new Tasks\Bundle\Publisher;
+    });
 }
 
 /**
@@ -121,8 +121,8 @@ if(! IoC::registered('bundle.publisher'))
  */
 if(! IoC::registered('bundle.provider: github'))
 {
-	IoC::singleton('bundle.provider: github', function()
-	{
-		return new Tasks\Bundle\Providers\Github;
-	});
+    IoC::singleton('bundle.provider: github', function()
+    {
+    	return new Tasks\Bundle\Providers\Github;
+    });
 }

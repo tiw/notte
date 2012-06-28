@@ -9,197 +9,197 @@ use Laravel\CLI\Tasks\Task;
 
 class Bundler extends Task {
 
-	/**
-	 * The bundle API repository.
-	 *
-	 * @var Repository
-	 */
-	protected $repository;
+    /**
+     * The bundle API repository.
+     *
+     * @var Repository
+     */
+    protected $repository;
 
-	/**
-	 * Create a new bundle manager task.
-	 *
-	 * @param  Repository  $repository
-	 * @return void
-	 */
-	public function __construct($repository)
-	{
-		$this->repository = $repository;
-	}
+    /**
+     * Create a new bundle manager task.
+     *
+     * @param  Repository  $repository
+     * @return void
+     */
+    public function __construct($repository)
+    {
+    	$this->repository = $repository;
+    }
 
-	/**
-	 * Install the given bundles into the application.
-	 *
-	 * @param  array  $bundles
-	 * @return void
-	 */
-	public function install($bundles)
-	{
-		foreach ($this->get($bundles) as $bundle)
-		{
-			if (Bundle::exists($bundle['name']))
-			{
-				echo "Bundle {$bundle['name']} is already installed.";
+    /**
+     * Install the given bundles into the application.
+     *
+     * @param  array  $bundles
+     * @return void
+     */
+    public function install($bundles)
+    {
+    	foreach ($this->get($bundles) as $bundle)
+    	{
+    		if (Bundle::exists($bundle['name']))
+    		{
+    			echo "Bundle {$bundle['name']} is already installed.";
 
-				continue;
-			}
+    			continue;
+    		}
 
-			// Once we have the bundle information, we can resolve an instance
-			// of a provider and install the bundle into the application and
-			// all of its registered dependencies as well.
-			//
-			// Each bundle provider implements the Provider interface and
-			// is repsonsible for retrieving the bundle source from its
-			// hosting party and installing it into the application.
-			$path = path('bundle').$this->path($bundle);
+    		// Once we have the bundle information, we can resolve an instance
+    		// of a provider and install the bundle into the application and
+    		// all of its registered dependencies as well.
+    		//
+    		// Each bundle provider implements the Provider interface and
+    		// is repsonsible for retrieving the bundle source from its
+    		// hosting party and installing it into the application.
+    		$path = path('bundle').$this->path($bundle);
 
-			echo "Fetching [{$bundle['name']}]...";
+    		echo "Fetching [{$bundle['name']}]...";
 
-			$this->download($bundle, $path);
+    		$this->download($bundle, $path);
 
-			echo "done! Bundle installed.".PHP_EOL;
-		}
-	}
+    		echo "done! Bundle installed.".PHP_EOL;
+    	}
+    }
 
-	/**
-	 * Upgrade the given bundles for the application.
-	 *
-	 * @param  array  $bundles
-	 * @return void
-	 */
-	public function upgrade($bundles)
-	{
-		if (count($bundles) == 0) $bundles = Bundle::names();
+    /**
+     * Upgrade the given bundles for the application.
+     *
+     * @param  array  $bundles
+     * @return void
+     */
+    public function upgrade($bundles)
+    {
+    	if (count($bundles) == 0) $bundles = Bundle::names();
 
-		foreach ($bundles as $name)
-		{
-			if ( ! Bundle::exists($name))
-			{
-				echo "Bundle [{$name}] is not installed!";
+    	foreach ($bundles as $name)
+    	{
+    		if ( ! Bundle::exists($name))
+    		{
+    			echo "Bundle [{$name}] is not installed!";
 
-				continue;
-			}
+    			continue;
+    		}
 
-			// First we want to retrieve the information for the bundle, such as
-			// where it is currently installed. This will allow us to upgrade
-			// the bundle into it's current installation path.
-			$location = Bundle::path($name);
+    		// First we want to retrieve the information for the bundle, such as
+    		// where it is currently installed. This will allow us to upgrade
+    		// the bundle into it's current installation path.
+    		$location = Bundle::path($name);
 
-			// If the bundle exists, we will grab the data about the bundle from
-			// the API so we can make the right bundle provider for the bundle,
-			// since we don't know the provider used to install.
-			$response = $this->retrieve($name);
+    		// If the bundle exists, we will grab the data about the bundle from
+    		// the API so we can make the right bundle provider for the bundle,
+    		// since we don't know the provider used to install.
+    		$response = $this->retrieve($name);
 
-			if ($response['status'] == 'not-found')
-			{
-				continue;
-			}
+    		if ($response['status'] == 'not-found')
+    		{
+    			continue;
+    		}
 
-			// Once we have the bundle information from the API, we'll simply
-			// recursively delete the bundle and then re-download it using
-			// the correct provider assigned to the bundle.
-			File::rmdir($location);
+    		// Once we have the bundle information from the API, we'll simply
+    		// recursively delete the bundle and then re-download it using
+    		// the correct provider assigned to the bundle.
+    		File::rmdir($location);
 
-			$this->download($response['bundle'], $location);
+    		$this->download($response['bundle'], $location);
 
-			echo "Bundle [{$name}] has been upgraded!".PHP_EOL;
-		}
-	}
+    		echo "Bundle [{$name}] has been upgraded!".PHP_EOL;
+    	}
+    }
 
-	/**
-	 * Gather all of the bundles from the bundle repository.
-	 *
-	 * @param  array  $bundles
-	 * @return array
-	 */
-	protected function get($bundles)
-	{
-		$responses = array();
+    /**
+     * Gather all of the bundles from the bundle repository.
+     *
+     * @param  array  $bundles
+     * @return array
+     */
+    protected function get($bundles)
+    {
+    	$responses = array();
 
-		foreach ($bundles as $bundle)
-		{
-			// First we'll call the bundle repository to gather the bundle data
-			// array, which contains all of the information needed to install
-			// the bundle into the Laravel application.
-			$response = $this->retrieve($bundle);
+    	foreach ($bundles as $bundle)
+    	{
+    		// First we'll call the bundle repository to gather the bundle data
+    		// array, which contains all of the information needed to install
+    		// the bundle into the Laravel application.
+    		$response = $this->retrieve($bundle);
 
-			if ($response['status'] == 'not-found')
-			{
-				throw new \Exception("There is no bundle named [$bundle].");
-			}
+    		if ($response['status'] == 'not-found')
+    		{
+    			throw new \Exception("There is no bundle named [$bundle].");
+    		}
 
-			// If the bundle was retrieved successfully, we will add it to
-			// our array of bundles, as well as merge all of the bundle's
-			// dependencies into the array of responses.
-			$bundle = $response['bundle'];
+    		// If the bundle was retrieved successfully, we will add it to
+    		// our array of bundles, as well as merge all of the bundle's
+    		// dependencies into the array of responses.
+    		$bundle = $response['bundle'];
 
-			$responses[] = $bundle;
+    		$responses[] = $bundle;
 
-			// We'll also get the bundle's declared dependenceis so they
-			// can be installed along with the bundle, making it easy
-			// to install a group of bundles.
-			$dependencies = $this->get($bundle['dependencies']);
+    		// We'll also get the bundle's declared dependenceis so they
+    		// can be installed along with the bundle, making it easy
+    		// to install a group of bundles.
+    		$dependencies = $this->get($bundle['dependencies']);
 
-			$responses = array_merge($responses, $dependencies);
-		}
+    		$responses = array_merge($responses, $dependencies);
+    	}
 
-		return $responses;
-	}
+    	return $responses;
+    }
 
-	/**
-	 * Publish bundle assets to the public directory.
-	 *
-	 * @param  array  $bundles
-	 * @return void
-	 */
-	public function publish($bundles)
-	{
-		if (count($bundles) == 0) $bundles = Bundle::names();
+    /**
+     * Publish bundle assets to the public directory.
+     *
+     * @param  array  $bundles
+     * @return void
+     */
+    public function publish($bundles)
+    {
+    	if (count($bundles) == 0) $bundles = Bundle::names();
 
-		array_walk($bundles, array(IoC::resolve('bundle.publisher'), 'publish'));
-	}
+    	array_walk($bundles, array(IoC::resolve('bundle.publisher'), 'publish'));
+    }
 
-	/**
-	 * Install a bundle using a provider.
-	 *
-	 * @param  string  $bundle
-	 * @param  string  $path
-	 * @return void
-	 */
-	protected function download($bundle, $path)
-	{
-		$provider = "bundle.provider: {$bundle['provider']}";
+    /**
+     * Install a bundle using a provider.
+     *
+     * @param  string  $bundle
+     * @param  string  $path
+     * @return void
+     */
+    protected function download($bundle, $path)
+    {
+    	$provider = "bundle.provider: {$bundle['provider']}";
 
-		IoC::resolve($provider)->install($bundle, $path);
-	}
+    	IoC::resolve($provider)->install($bundle, $path);
+    }
 
-	/**
-	 * Retrieve a bundle from the repository.
-	 *
-	 * @param  string  $bundle
-	 * @return array
-	 */
-	protected function retrieve($bundle)
-	{
-		$response = $this->repository->get($bundle);
+    /**
+     * Retrieve a bundle from the repository.
+     *
+     * @param  string  $bundle
+     * @return array
+     */
+    protected function retrieve($bundle)
+    {
+    	$response = $this->repository->get($bundle);
 
-		if ( ! $response)
-		{
-			throw new \Exception("The bundle API is not responding.");
-		}
+    	if ( ! $response)
+    	{
+    		throw new \Exception("The bundle API is not responding.");
+    	}
 
-		return $response;
-	}
+    	return $response;
+    }
 
-	/**
-	 * Return the path for a given bundle.
-	 *
-	 * @param  array   $bundle
-	 * @return string
-	 */
-	protected function path($bundle)
-	{
-		return array_get($bundle, 'path', $bundle['name']);
-	}
+    /**
+     * Return the path for a given bundle.
+     *
+     * @param  array   $bundle
+     * @return string
+     */
+    protected function path($bundle)
+    {
+    	return array_get($bundle, 'path', $bundle['name']);
+    }
 
 }

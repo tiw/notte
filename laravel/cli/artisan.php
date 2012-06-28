@@ -19,7 +19,7 @@ Bundle::start(DEFAULT_BUNDLE);
 
 if ( ! is_null($database = get_cli_option('db')))
 {
-	Config::set('database.default', $database);
+    Config::set('database.default', $database);
 }
 
 /**
@@ -39,11 +39,11 @@ require path('sys').'cli/dependencies'.EXT;
  */
 try
 {
-	Command::run(array_slice($arguments, 1));
+    Command::run(array_slice($arguments, 1));
 }
 catch (\Exception $e)
 {
-	echo $e->getMessage();
+    echo $e->getMessage();
 }
 
 echo PHP_EOL;

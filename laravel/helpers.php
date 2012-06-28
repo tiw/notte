@@ -10,7 +10,7 @@
  */
 function e($value)
 {
-	return Laravel\HTML::entities($value);
+    return Laravel\HTML::entities($value);
 }
 
 /**
@@ -23,7 +23,7 @@ function e($value)
  */
 function __($key, $replacements = array(), $language = null)
 {
-	return Laravel\Lang::line($key, $replacements, $language);
+    return Laravel\Lang::line($key, $replacements, $language);
 }
 
 /**
@@ -34,18 +34,18 @@ function __($key, $replacements = array(), $language = null)
  */
 function dd($value)
 {
-	die(var_dump($value));
+    die(var_dump($value));
 }
 
 /**
  * Get an item from an array using "dot" notation.
  *
  * <code>
- *		// Get the $array['user']['name'] value from the array
- *		$name = array_get($array, 'user.name');
+ *    	// Get the $array['user']['name'] value from the array
+ *    	$name = array_get($array, 'user.name');
  *
- *		// Return a default from if the specified item doesn't exist
- *		$name = array_get($array, 'user.name', 'Taylor');
+ *    	// Return a default from if the specified item doesn't exist
+ *    	$name = array_get($array, 'user.name', 'Taylor');
  * </code>
  *
  * @param  array   $array
@@ -55,23 +55,23 @@ function dd($value)
  */
 function array_get($array, $key, $default = null)
 {
-	if (is_null($key)) return $array;
+    if (is_null($key)) return $array;
 
-	// To retrieve the array item using dot syntax, we'll iterate through
-	// each segment in the key and look for that value. If it exists, we
-	// will return it, otherwise we will set the depth of the array and
-	// look for the next segment.
-	foreach (explode('.', $key) as $segment)
-	{
-		if ( ! is_array($array) or ! array_key_exists($segment, $array))
-		{
-			return value($default);
-		}
+    // To retrieve the array item using dot syntax, we'll iterate through
+    // each segment in the key and look for that value. If it exists, we
+    // will return it, otherwise we will set the depth of the array and
+    // look for the next segment.
+    foreach (explode('.', $key) as $segment)
+    {
+    	if ( ! is_array($array) or ! array_key_exists($segment, $array))
+    	{
+    		return value($default);
+    	}
 
-		$array = $array[$segment];
-	}
+    	$array = $array[$segment];
+    }
 
-	return $array;
+    return $array;
 }
 
 /**
@@ -80,11 +80,11 @@ function array_get($array, $key, $default = null)
  * If no key is given to the method, the entire array will be replaced.
  *
  * <code>
- *		// Set the $array['user']['name'] value on the array
- *		array_set($array, 'user.name', 'Taylor');
+ *    	// Set the $array['user']['name'] value on the array
+ *    	array_set($array, 'user.name', 'Taylor');
  *
- *		// Set the $array['user']['name']['first'] value on the array
- *		array_set($array, 'user.name.first', 'Michael');
+ *    	// Set the $array['user']['name']['first'] value on the array
+ *    	array_set($array, 'user.name.first', 'Michael');
  * </code>
  *
  * @param  array   $array
@@ -94,41 +94,41 @@ function array_get($array, $key, $default = null)
  */
 function array_set(&$array, $key, $value)
 {
-	if (is_null($key)) return $array = $value;
+    if (is_null($key)) return $array = $value;
 
-	$keys = explode('.', $key);
+    $keys = explode('.', $key);
 
-	// This loop allows us to dig down into the array to a dynamic depth by
-	// setting the array value for each level that we dig into. Once there
-	// is one key left, we can fall out of the loop and set the value as
-	// we should be at the proper depth.
-	while (count($keys) > 1)
-	{
-		$key = array_shift($keys);
+    // This loop allows us to dig down into the array to a dynamic depth by
+    // setting the array value for each level that we dig into. Once there
+    // is one key left, we can fall out of the loop and set the value as
+    // we should be at the proper depth.
+    while (count($keys) > 1)
+    {
+    	$key = array_shift($keys);
 
-		// If the key doesn't exist at this depth, we will just create an
-		// empty array to hold the next value, allowing us to create the
-		// arrays to hold the final value.
-		if ( ! isset($array[$key]) or ! is_array($array[$key]))
-		{
-			$array[$key] = array();
-		}
+    	// If the key doesn't exist at this depth, we will just create an
+    	// empty array to hold the next value, allowing us to create the
+    	// arrays to hold the final value.
+    	if ( ! isset($array[$key]) or ! is_array($array[$key]))
+    	{
+    		$array[$key] = array();
+    	}
 
-		$array =& $array[$key];
-	}
+    	$array =& $array[$key];
+    }
 
-	$array[array_shift($keys)] = $value;
+    $array[array_shift($keys)] = $value;
 }
 
 /**
  * Remove an array item from a given array using "dot" notation.
  *
  * <code>
- *		// Remove the $array['user']['name'] item from the array
- *		array_forget($array, 'user.name');
+ *    	// Remove the $array['user']['name'] item from the array
+ *    	array_forget($array, 'user.name');
  *
- *		// Remove the $array['user']['name']['first'] item from the array
- *		array_forget($array, 'user.name.first');
+ *    	// Remove the $array['user']['name']['first'] item from the array
+ *    	array_forget($array, 'user.name.first');
  * </code>
  *
  * @param  array   $array
@@ -137,40 +137,40 @@ function array_set(&$array, $key, $value)
  */
 function array_forget(&$array, $key)
 {
-	$keys = explode('.', $key);
+    $keys = explode('.', $key);
 
-	// This loop functions very similarly to the loop in the "set" method.
-	// We will iterate over the keys, setting the array value to the new
-	// depth at each iteration. Once there is only one key left, we will
-	// be at the proper depth in the array.
-	while (count($keys) > 1)
-	{
-		$key = array_shift($keys);
+    // This loop functions very similarly to the loop in the "set" method.
+    // We will iterate over the keys, setting the array value to the new
+    // depth at each iteration. Once there is only one key left, we will
+    // be at the proper depth in the array.
+    while (count($keys) > 1)
+    {
+    	$key = array_shift($keys);
 
-		// Since this method is supposed to remove a value from the array,
-		// if a value higher up in the chain doesn't exist, there is no
-		// need to keep digging into the array, since it is impossible
-		// for the final value to even exist.
-		if ( ! isset($array[$key]) or ! is_array($array[$key]))
-		{
-			return;
-		}
+    	// Since this method is supposed to remove a value from the array,
+    	// if a value higher up in the chain doesn't exist, there is no
+    	// need to keep digging into the array, since it is impossible
+    	// for the final value to even exist.
+    	if ( ! isset($array[$key]) or ! is_array($array[$key]))
+    	{
+    		return;
+    	}
 
-		$array =& $array[$key];
-	}
+    	$array =& $array[$key];
+    }
 
-	unset($array[array_shift($keys)]);
+    unset($array[array_shift($keys)]);
 }
 
 /**
  * Return the first element in an array which passes a given truth test.
  *
  * <code>
- *		// Return the first array element that equals "Taylor"
- *		$value = array_first($array, function($k, $v) {return $v == 'Taylor';});
+ *    	// Return the first array element that equals "Taylor"
+ *    	$value = array_first($array, function($k, $v) {return $v == 'Taylor';});
  *
- *		// Return a default value if no matching element is found
- *		$value = array_first($array, function($k, $v) {return $v == 'Taylor'}, 'Default');
+ *    	// Return a default value if no matching element is found
+ *    	$value = array_first($array, function($k, $v) {return $v == 'Taylor'}, 'Default');
  * </code>
  *
  * @param  array    $array
@@ -180,12 +180,12 @@ function array_forget(&$array, $key)
  */
 function array_first($array, $callback, $default = null)
 {
-	foreach ($array as $key => $value)
-	{
-		if (call_user_func($callback, $key, $value)) return $value;
-	}
+    foreach ($array as $key => $value)
+    {
+    	if (call_user_func($callback, $key, $value)) return $value;
+    }
 
-	return value($default);
+    return value($default);
 }
 
 /**
@@ -196,26 +196,26 @@ function array_first($array, $callback, $default = null)
  */
 function array_strip_slashes($array)
 {
-	$result = array();
+    $result = array();
 
-	foreach($array as $key => $value)
-	{
-		$key = stripslashes($key);
+    foreach($array as $key => $value)
+    {
+    	$key = stripslashes($key);
 
-		// If the value is an array, we will just recurse back into the
-		// function to keep stripping the slashes out of the array,
-		// otherwise we will set the stripped value.
-		if (is_array($value))
-		{
-			$result[$key] = array_strip_slashes($value);
-		}
-		else
-		{
-			$result[$key] = stripslashes($value);
-		}
-	}
+    	// If the value is an array, we will just recurse back into the
+    	// function to keep stripping the slashes out of the array,
+    	// otherwise we will set the stripped value.
+    	if (is_array($value))
+    	{
+    		$result[$key] = array_strip_slashes($value);
+    	}
+    	else
+    	{
+    		$result[$key] = stripslashes($value);
+    	}
+    }
 
-	return $result;
+    return $result;
 }
 
 /**
@@ -226,7 +226,7 @@ function array_strip_slashes($array)
  */
 function array_divide($array)
 {
-	return array(array_keys($array), array_values($array));
+    return array(array_keys($array), array_values($array));
 }
 
 /**
@@ -238,11 +238,11 @@ function array_divide($array)
  */
 function array_pluck($array, $key)
 {
-	return array_map(function($v) use ($key)
-	{
-		return is_object($v) ? $v->$key : $v[$key];
+    return array_map(function($v) use ($key)
+    {
+    	return is_object($v) ? $v->$key : $v[$key];
 
-	}, $array);
+    }, $array);
 }
 
 /**
@@ -254,7 +254,7 @@ function array_pluck($array, $key)
  */
 function array_only($array, $keys)
 {
-	return array_intersect_key( $array, array_flip((array) $keys) );
+    return array_intersect_key( $array, array_flip((array) $keys) );
 }
 
 /**
@@ -266,7 +266,7 @@ function array_only($array, $keys)
  */
 function array_except($array, $keys)
 {
-	return array_diff_key( $array, array_flip((array) $keys) );
+    return array_diff_key( $array, array_flip((array) $keys) );
 }
 
 /**
@@ -277,12 +277,12 @@ function array_except($array, $keys)
  */
 function eloquent_to_json($models)
 {
-	if ($models instanceof Laravel\Database\Eloquent\Model)
-	{
-		return json_encode($models->to_array());
-	}
+    if ($models instanceof Laravel\Database\Eloquent\Model)
+    {
+    	return json_encode($models->to_array());
+    }
 
-	return json_encode(array_map(function($m) { return $m->to_array(); }, $models));
+    return json_encode(array_map(function($m) { return $m->to_array(); }, $models));
 }
 
 /**
@@ -292,7 +292,7 @@ function eloquent_to_json($models)
  */
 function magic_quotes()
 {
-	return function_exists('get_magic_quotes_gpc') and get_magic_quotes_gpc();
+    return function_exists('get_magic_quotes_gpc') and get_magic_quotes_gpc();
 }
 
 /**
@@ -305,18 +305,18 @@ function magic_quotes()
  */
 function head($array)
 {
-	return reset($array);
+    return reset($array);
 }
 
 /**
  * Generate an application URL.
  *
  * <code>
- *		// Create a URL to a location within the application
- *		$url = path('user/profile');
+ *    	// Create a URL to a location within the application
+ *    	$url = path('user/profile');
  *
- *		// Create a HTTPS URL to a location within the application
- *		$url = path('user/profile', true);
+ *    	// Create a HTTPS URL to a location within the application
+ *    	$url = path('user/profile', true);
  * </code>
  *
  * @param  string  $url
@@ -325,7 +325,7 @@ function head($array)
  */
 function url($url = '', $https = null)
 {
-	return Laravel\URL::to($url, $https);
+    return Laravel\URL::to($url, $https);
 }
 
 /**
@@ -337,18 +337,18 @@ function url($url = '', $https = null)
  */
 function asset($url, $https = null)
 {
-	return Laravel\URL::to_asset($url, $https);
+    return Laravel\URL::to_asset($url, $https);
 }
 
 /**
  * Generate a URL to a controller action.
  *
  * <code>
- *		// Generate a URL to the "index" method of the "user" controller
- *		$url = action('user@index');
+ *    	// Generate a URL to the "index" method of the "user" controller
+ *    	$url = action('user@index');
  *
- *		// Generate a URL to http://example.com/user/profile/taylor
- *		$url = action('user@profile', array('taylor'));
+ *    	// Generate a URL to http://example.com/user/profile/taylor
+ *    	$url = action('user@profile', array('taylor'));
  * </code>
  *
  * @param  string  $action
@@ -357,18 +357,18 @@ function asset($url, $https = null)
  */
 function action($action, $parameters = array())
 {
-	return Laravel\URL::to_action($action, $parameters);
+    return Laravel\URL::to_action($action, $parameters);
 }
 
 /**
  * Generate a URL from a route name.
  *
  * <code>
- *		// Create a URL to the "profile" named route
- *		$url = route('profile');
+ *    	// Create a URL to the "profile" named route
+ *    	$url = route('profile');
  *
- *		// Create a URL to the "profile" named route with wildcard parameters
- *		$url = route('profile', array($username));
+ *    	// Create a URL to the "profile" named route with wildcard parameters
+ *    	$url = route('profile', array($username));
  * </code>
  *
  * @param  string  $name
@@ -377,7 +377,7 @@ function action($action, $parameters = array())
  */
 function route($name, $parameters = array())
 {
-	return Laravel\URL::to_route($name, $parameters);
+    return Laravel\URL::to_route($name, $parameters);
 }
 
 /**
@@ -389,7 +389,7 @@ function route($name, $parameters = array())
  */
 function starts_with($haystack, $needle)
 {
-	return strpos($haystack, $needle) === 0;
+    return strpos($haystack, $needle) === 0;
 }
 
 /**
@@ -401,7 +401,7 @@ function starts_with($haystack, $needle)
  */
 function ends_with($haystack, $needle)
 {
-	return $needle == substr($haystack, strlen($haystack) - strlen($needle));
+    return $needle == substr($haystack, strlen($haystack) - strlen($needle));
 }
 
 /**
@@ -413,12 +413,12 @@ function ends_with($haystack, $needle)
  */
 function str_contains($haystack, $needle)
 {
-	foreach ((array) $needle as $n)
-	{
-		if (strpos($haystack, $n) !== false) return true;
-	}
+    foreach ((array) $needle as $n)
+    {
+    	if (strpos($haystack, $n) !== false) return true;
+    }
 
-	return false;
+    return false;
 }
 
 /**
@@ -430,7 +430,7 @@ function str_contains($haystack, $needle)
  */
 function str_finish($value, $cap)
 {
-	return rtrim($value, $cap).$cap;
+    return rtrim($value, $cap).$cap;
 }
 
 /**
@@ -441,7 +441,7 @@ function str_finish($value, $cap)
  */
 function str_object($value)
 {
-	return is_object($value) and method_exists($value, '__toString');
+    return is_object($value) and method_exists($value, '__toString');
 }
 
 /**
@@ -453,10 +453,10 @@ function str_object($value)
  */
 function root_namespace($class, $separator = '\\')
 {
-	if (str_contains($class, $separator))
-	{
-		return head(explode($separator, $class));
-	}
+    if (str_contains($class, $separator))
+    {
+    	return head(explode($separator, $class));
+    }
 }
 
 /**
@@ -469,9 +469,9 @@ function root_namespace($class, $separator = '\\')
  */
 function class_basename($class)
 {
-	if (is_object($class)) $class = get_class($class);
+    if (is_object($class)) $class = get_class($class);
 
-	return basename(str_replace('\\', '/', $class));
+    return basename(str_replace('\\', '/', $class));
 }
 
 /**
@@ -484,7 +484,7 @@ function class_basename($class)
  */
 function value($value)
 {
-	return (is_callable($value) and ! is_string($value)) ? call_user_func($value) : $value;
+    return (is_callable($value) and ! is_string($value)) ? call_user_func($value) : $value;
 }
 
 /**
@@ -495,7 +495,7 @@ function value($value)
  */
 function with($object)
 {
-	return $object;
+    return $object;
 }
 
 /**
@@ -506,7 +506,7 @@ function with($object)
  */
 function has_php($version)
 {
-	return version_compare(PHP_VERSION, $version) >= 0;
+    return version_compare(PHP_VERSION, $version) >= 0;
 }
 
 /**
@@ -518,9 +518,9 @@ function has_php($version)
  */
 function view($view, $data = array())
 {
-	if (is_null($view)) return '';
+    if (is_null($view)) return '';
 
-	return Laravel\View::make($view, $data);
+    return Laravel\View::make($view, $data);
 }
 
 /**
@@ -532,9 +532,9 @@ function view($view, $data = array())
  */
 function render($view, $data = array())
 {
-	if (is_null($view)) return '';
+    if (is_null($view)) return '';
 
-	return Laravel\View::make($view, $data)->render();
+    return Laravel\View::make($view, $data)->render();
 }
 
 /**
@@ -548,7 +548,7 @@ function render($view, $data = array())
  */
 function render_each($partial, array $data, $iterator, $empty = 'raw|')
 {
-	return Laravel\View::render_each($partial, $data, $iterator, $empty);
+    return Laravel\View::render_each($partial, $data, $iterator, $empty);
 }
 
 /**
@@ -559,7 +559,7 @@ function render_each($partial, array $data, $iterator, $empty = 'raw|')
  */
 function yield($section)
 {
-	return Laravel\Section::yield($section);
+    return Laravel\Section::yield($section);
 }
 
 /**
@@ -571,13 +571,13 @@ function yield($section)
  */
 function get_cli_option($option, $default = null)
 {
-	foreach (Laravel\Request::foundation()->server->get('argv') as $argument)
-	{
-		if (starts_with($argument, "--{$option}="))
-		{
-			return substr($argument, strlen($option) + 3);
-		}
-	}
+    foreach (Laravel\Request::foundation()->server->get('argv') as $argument)
+    {
+    	if (starts_with($argument, "--{$option}="))
+    	{
+    		return substr($argument, strlen($option) + 3);
+    	}
+    }
 
-	return value($default);
+    return value($default);
 }

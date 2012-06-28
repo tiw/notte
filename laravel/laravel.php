@@ -27,25 +27,25 @@ require 'core.php';
 
 set_exception_handler(function($e)
 {
-	require_once path('sys').'error'.EXT;
+    require_once path('sys').'error'.EXT;
 
-	Error::exception($e);
+    Error::exception($e);
 });
 
 
 set_error_handler(function($code, $error, $file, $line)
 {
-	require_once path('sys').'error'.EXT;
+    require_once path('sys').'error'.EXT;
 
-	Error::native($code, $error, $file, $line);
+    Error::native($code, $error, $file, $line);
 });
 
 
 register_shutdown_function(function()
 {
-	require_once path('sys').'error'.EXT;
+    require_once path('sys').'error'.EXT;
 
-	Error::shutdown();
+    Error::shutdown();
 });
 
 /*
@@ -88,7 +88,7 @@ Bundle::start(DEFAULT_BUNDLE);
 
 foreach (Bundle::$bundles as $bundle => $config)
 {
-	if ($config['auto']) Bundle::start($bundle);
+    if ($config['auto']) Bundle::start($bundle);
 }
 
 /*
@@ -104,7 +104,7 @@ foreach (Bundle::$bundles as $bundle => $config)
 
 Routing\Router::register('*', '(:all)', function()
 {
-	return Event::first('404');
+    return Event::first('404');
 });
 
 /*
@@ -150,7 +150,7 @@ $response->render();
 
 if (Config::get('session.driver') !== '')
 {
-	Session::save();
+    Session::save();
 }
 
 /*

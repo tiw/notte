@@ -75,15 +75,15 @@ Autoloader::namespaces(array('Laravel' => path('sys')));
 */
 
 Autoloader::map(array(
-	'Laravel\\Database\\Eloquent\\Relationships\\Belongs_To' 
+    'Laravel\\Database\\Eloquent\\Relationships\\Belongs_To' 
                     => path('sys').'database/eloquent/relationships/belongs_to'.EXT,
-	'Laravel\\Database\\Eloquent\\Relationships\\Has_Many' 
+    'Laravel\\Database\\Eloquent\\Relationships\\Has_Many' 
                     => path('sys').'database/eloquent/relationships/has_many'.EXT,
-	'Laravel\\Database\\Eloquent\\Relationships\\Has_Many_And_Belongs_To' 
+    'Laravel\\Database\\Eloquent\\Relationships\\Has_Many_And_Belongs_To' 
                     => path('sys').'database/eloquent/relationships/has_many_and_belongs_to'.EXT,
-	'Laravel\\Database\\Eloquent\\Relationships\\Has_One' 
+    'Laravel\\Database\\Eloquent\\Relationships\\Has_One' 
                     => path('sys').'database/eloquent/relationships/has_one'.EXT,
-	'Laravel\\Database\\Eloquent\\Relationships\\Has_One_Or_Many' 
+    'Laravel\\Database\\Eloquent\\Relationships\\Has_One_Or_Many' 
                     => path('sys').'database/eloquent/relationships/has_one_or_many'.EXT,
 ));
 
@@ -100,9 +100,9 @@ Autoloader::map(array(
 */
 
 Autoloader::namespaces(array(
-	'Symfony\Component\Console' 
+    'Symfony\Component\Console' 
                     => path('sys').'vendor/Symfony/Component/Console',
-	'Symfony\Component\HttpFoundation'
+    'Symfony\Component\HttpFoundation'
                     => path('sys').'vendor/Symfony/Component/HttpFoundation',
 ));
 
@@ -119,12 +119,12 @@ Autoloader::namespaces(array(
 
 if (magic_quotes())
 {
-	$magics = array(&$_GET, &$_POST, &$_COOKIE, &$_REQUEST);
+    $magics = array(&$_GET, &$_POST, &$_COOKIE, &$_REQUEST);
 
-	foreach ($magics as &$magic)
-	{
-		$magic = array_strip_slashes($magic);
-	}
+    foreach ($magics as &$magic)
+    {
+    	$magic = array_strip_slashes($magic);
+    }
 }
 
 /*
@@ -157,18 +157,18 @@ Request::$foundation = RequestFoundation::createFromGlobals();
 
 if (Request::cli())
 {
-	$environment = get_cli_option('env');
+    $environment = get_cli_option('env');
 
-	if ( ! isset($environment))
-	{
-		$environment = Request::detect_env($environments, gethostname());
-	}
+    if ( ! isset($environment))
+    {
+    	$environment = Request::detect_env($environments, gethostname());
+    }
 }
 else
 {
-	$root = Request::foundation()->getRootUrl();
+    $root = Request::foundation()->getRootUrl();
 
-	$environment = Request::detect_env($environments, $root);
+    $environment = Request::detect_env($environments, $root);
 }
 
 /*
@@ -185,7 +185,7 @@ else
 
 if (isset($environment))
 {
-	Request::set_env($environment);
+    Request::set_env($environment);
 }
 
 /*
@@ -201,13 +201,13 @@ if (isset($environment))
 
 if (defined('STDIN'))
 {
-	$console = CLI\Command::options($_SERVER['argv']);
+    $console = CLI\Command::options($_SERVER['argv']);
 
-	list($arguments, $options) = $console;
+    list($arguments, $options) = $console;
 
-	$options = array_change_key_case($options, CASE_UPPER);
+    $options = array_change_key_case($options, CASE_UPPER);
 
-	$_SERVER['CLI'] = $options;
+    $_SERVER['CLI'] = $options;
 }
 
 /*
@@ -225,5 +225,5 @@ $bundles = require path('app').'bundles'.EXT;
 
 foreach ($bundles as $bundle => $config)
 {
-	Bundle::register($bundle, $config);
+    Bundle::register($bundle, $config);
 }

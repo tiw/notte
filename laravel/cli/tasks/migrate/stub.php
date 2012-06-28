@@ -2,24 +2,24 @@
 
 class {{class}} {
 
-	/**
-	 * Make changes to the database.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
-		//
-	}
+    /**
+     * Make changes to the database.
+     *
+     * @return void
+     */
+    public function up()
+    {
+    	//
+    }
 
-	/**
-	 * Revert the changes to the database.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-		//
-	}
+    /**
+     * Revert the changes to the database.
+     *
+     * @return void
+     */
+    public function down()
+    {
+    	//
+    }
 
 }

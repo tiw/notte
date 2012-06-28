@@ -12,7 +12,7 @@ require_once __DIR__.'/libraries/markdown.php';
  */
 function doc_root()
 {
-	return path('sys').'documentation/';
+    return path('sys').'documentation/';
 }
 
 /**
@@ -23,7 +23,7 @@ function doc_root()
  */
 function document($page)
 {
-	return Markdown(file_get_contents(doc_root().$page.'.md'));
+    return Markdown(file_get_contents(doc_root().$page.'.md'));
 }
 
 /**
@@ -34,7 +34,7 @@ function document($page)
  */
 function document_exists($page)
 {
-	return file_exists(doc_root().$page.'.md');
+    return file_exists(doc_root().$page.'.md');
 }
 
 /**
@@ -42,7 +42,7 @@ function document_exists($page)
  */
 View::composer('docs::template', function($view)
 {
-	$view->with('sidebar', document('contents'));
+    $view->with('sidebar', document('contents'));
 });
 
 /**
@@ -52,7 +52,7 @@ View::composer('docs::template', function($view)
  */
 Route::get('(:bundle)', function()
 {
-	return View::make('docs::page')->with('content', document('home'));
+    return View::make('docs::page')->with('content', document('home'));
 });
 
 /**
@@ -64,22 +64,22 @@ Route::get('(:bundle)', function()
  */
 Route::get('(:bundle)/(:any)/(:any?)', function($section, $page = null)
 {
-	$file = rtrim(implode('/', func_get_args()), '/');
+    $file = rtrim(implode('/', func_get_args()), '/');
 
-	// If no page was specified, but a "home" page exists for the section,
-	// we'll set the file to the home page so that the proper page is
-	// display back out to the client for the requested doc page.
-	if (is_null($page) and document_exists($file.'/home'))
-	{
-		$file .= '/home';
-	}
+    // If no page was specified, but a "home" page exists for the section,
+    // we'll set the file to the home page so that the proper page is
+    // display back out to the client for the requested doc page.
+    if (is_null($page) and document_exists($file.'/home'))
+    {
+    	$file .= '/home';
+    }
 
-	if (document_exists($file))
-	{
-		return View::make('docs::page')->with('content', document($file));
-	}
-	else
-	{
-		return Response::error('404');
-	}
+    if (document_exists($file))
+    {
+    	return View::make('docs::page')->with('content', document($file));
+    }
+    else
+    {
+    	return Response::error('404');
+    }
 });

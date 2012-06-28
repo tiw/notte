@@ -2,18 +2,18 @@
 
 class Github extends Provider {
 
-	/**
-	 * Install the given bundle into the application.
-	 *
-	 * @param  string  $bundle
-	 * @param  string  $path
-	 * @return void
-	 */
-	public function install($bundle, $path)
-	{
-		$url = "http://nodeload.github.com/{$bundle['location']}/zipball/master";
+    /**
+     * Install the given bundle into the application.
+     *
+     * @param  string  $bundle
+     * @param  string  $path
+     * @return void
+     */
+    public function install($bundle, $path)
+    {
+    	$url = "http://nodeload.github.com/{$bundle['location']}/zipball/master";
 
-		parent::zipball($url, $bundle, $path);
-	}
+    	parent::zipball($url, $bundle, $path);
+    }
 
 }

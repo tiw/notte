@@ -2,12 +2,12 @@
 
 interface Sweeper {
 
-	/**
-	 * Delete all expired sessions from persistant storage.
-	 *
-	 * @param  int   $expiration
-	 * @return void
-	 */
-	public function sweep($expiration);
+    /**
+     * Delete all expired sessions from persistant storage.
+     *
+     * @param  int   $expiration
+     * @return void
+     */
+    public function sweep($expiration);
 
 }

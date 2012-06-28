@@ -2,11 +2,11 @@
 
 class MySQL extends Grammar {
 
-	/**
-	 * The keyword identifier for the database system.
-	 *
-	 * @var string
-	 */
-	protected $wrapper = '`%s`';
+    /**
+     * The keyword identifier for the database system.
+     *
+     * @var string
+     */
+    protected $wrapper = '`%s`';
 
 }
