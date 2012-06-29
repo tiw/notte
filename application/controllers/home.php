@@ -1,9 +1,11 @@
 <?php
 
-class Home_Controller extends Base_Controller {
+class Home_Controller extends Base_Controller
+{
 
     public function action_index()
     {
+        //var_dump(Config::get('database'));die;
         $user = new User();
         $user->firstname = 'Ting';
         $user->lastname = 'Wang';
