@@ -10,6 +10,10 @@ class Home_Controller extends Base_Controller
         $user->firstname = 'Ting';
         $user->lastname = 'Wang';
         $user->save();
+        $tf = new Timefragment();
+        $tf->user_id = 1;
+        $tf->note = "xxx";
+        $tf->save();
         return View::make('home.index')->with('name', 'Ting');
     }
 
