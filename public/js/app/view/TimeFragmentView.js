@@ -8,6 +8,12 @@ define(['app/model/TimeFragment', 'text!templates/time-fragment/time-fragment-li
                 var compiledTemplate = this.template(this.model.toJSON());
                 $(this.el).html(compiledTemplate);
             return this;
+        },
+        events: {
+            'click .delete-ft': 'deleteModel'
+        },
+        deleteModel: function () {
+            this.model.destroy({data: {id: this.model.get('id')}});
         }
     });
     return TimeFragmentView;
