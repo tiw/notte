@@ -2,6 +2,7 @@
 define(['order!lib/underscore', 'order!lib/backbone'], function() {
     var TimeFragment = Backbone.Model.extend({
         url: 'api/timefragment',
+        defaults: {note: ''},
         parse: function(data) {
             console.log(data);
             return new TimeFragment({
