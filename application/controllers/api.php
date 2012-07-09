@@ -6,7 +6,8 @@ class Api_Controller extends Base_Controller
 
     public function get_timefragment()
     {
-        echo "get";
+        $timefragments = Timefragment::where('user_id' , '=', 1)->get();
+        echo json_encode($timefragments);
     }
 
     public function put_timefragment()
@@ -18,8 +19,19 @@ class Api_Controller extends Base_Controller
     public function post_timefragment()
     {
         $json = Input::json();
-        //todo save the time fragment
-        echo json_encode($json);
+        $timeFragment = new Timefragment();
+        //todo: get user info from auht identity
+        $timeFragment->user_id = 1;
+        $timeFragment->project = $json->project;
+        $timeFragment->note = $json->note;
+        $timeFragment->start_time = $json->startTime;
+        $timeFragment->end_time = $json->endTime;
+        try {
+            $timeFragment->save();
+            echo json_encode($json);
+        } catch(Exception $e) {
+            echo json_encode(array('status' => 'error', 'message' => $e->getMessage()));
+        }
     }
 
     /**
