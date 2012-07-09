@@ -1,1 +1,6 @@
-<td><%= startTime.toString('HH:mm') %> - <%= endTime.toString('HH:mm') %> </td><td> <%= project %></td><td> <%= note %><td><%= Math.round(startTime.diffMinutes(endTime)) %>
+<td><%= startTime.toString('HH:mm') %> - <%= endTime.toString('HH:mm') %> </td>
+<td> <%= project %></td>
+<td> <%= note %></td>
+<td><%= Math.round(startTime.diffMinutes(endTime)) %></td>
+<td><a class="btn edit-ft"><i class="icon-edit icon-black"></i></a>
+<a class="btn delete-ft"><i class="icon-trash icon-black"></i></a></td>
