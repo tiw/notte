@@ -23,6 +23,12 @@ define(['app/model/TimeFragment', 'app/model/TimeFragmentCollection', 'app/view/
             this.timeFragmentCollection.bind('add', this.addOne, this);
             this.timeFragmentCollection.bind('reset', this.addAll, this);
 
+            /**
+             * short cut
+             */
+             var that = this;
+             key('s', function() { that.stopTime(); });
+
             this.delegateEvents();
             this.timeFragmentCollection.fetch();
         },
@@ -50,6 +56,10 @@ define(['app/model/TimeFragment', 'app/model/TimeFragmentCollection', 'app/view/
          * creat a new one whose start time is current time
          */
         stopTime: function() {
+            if (!this.currentTimeFragment.get('project') ||
+                this.currentTimeFragment.get('project').trim() == '') {
+                return ;
+            }
             var currentTime = XDate();
             this.currentTimeFragment.set({endTime: currentTime});
             var timeFragment =
