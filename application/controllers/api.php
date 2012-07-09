@@ -7,7 +7,11 @@ class Api_Controller extends Base_Controller
     public function get_timefragment()
     {
         $timefragments = Timefragment::where('user_id' , '=', 1)->get();
-        echo json_encode($timefragments);
+        $flatTimefragments = array();
+        foreach ($timefragments as $timefragment) {
+            $flatTimefragments[] = $timefragment->to_array();
+        }
+        echo json_encode($flatTimefragments);
     }
 
     public function put_timefragment()

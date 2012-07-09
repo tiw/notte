@@ -31,7 +31,6 @@ define(['app/model/TimeFragment', 'app/model/TimeFragmentCollection', 'app/view/
             this.$('.time-fragment-list').append(timeFragmentView.render().el);
         },
         addAll: function() {
-            console.log(this.timeFragmentCollection);
             this.timeFragmentCollection.each(this.addOne);
         },
         updateCurrentTime: function(model) {
@@ -58,9 +57,7 @@ define(['app/model/TimeFragment', 'app/model/TimeFragmentCollection', 'app/view/
             var that = this;
             timeFragment.save(timeFragment, {
                 success: function(model, resp) {
-                    console.log(model, resp);
                     //add to the list
-                    console.log('success adding time fragment');
                     that.timeFragmentCollection.add(model);
                     that.currentTimeFragment.set({startTime: currentTime});
                 },

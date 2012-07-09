@@ -3,10 +3,8 @@ define(['app/model/TimeFragment'], function(TimeFragment) {
         model: TimeFragment,
         url: 'api/timefragment',
         parse: function(resp) {
-            console.log(resp);
             var timeFragments = [];
-            data = resp.data;
-            _.each(data, function(d, index) {
+            _.each(resp, function(d, index) {
                 var tf = new TimeFragment({
                     id: d.id,
                     project: d.project,
