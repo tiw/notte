@@ -56,7 +56,19 @@ define(['app/model/TimeFragment', 'app/model/TimeFragmentCollection', 'app/view/
             var timeFragment =
                 new TimeFragment(this.currentTimeFragment.toJSON());
             var that = this;
-            timeFragment.save(timeFragment);
+            timeFragment.save(timeFragment, {
+                success: function(model, resp) {
+                    console.log(model, resp);
+                    //add to the list
+                    console.log('success adding time fragment');
+                    that.timeFragmentCollection.add(model);
+                    that.currentTimeFragment.set({startTime: currentTime});
+                },
+                error: function(model, resp) {
+                    // time fragment cannot be inserted.
+                    console.log('error by inserting time fragment');
+                }
+            });
         },
         changeNode: function() {
             //console.log('change note');
