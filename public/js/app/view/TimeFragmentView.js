@@ -6,7 +6,6 @@ define(['app/model/TimeFragment', 'text!templates/time-fragment/time-fragment-li
         template: _.template(lineTemplate),
         render: function() {
                 var compiledTemplate = this.template(this.model.toJSON());
-                console.log(compiledTemplate);
                 $(this.el).html(compiledTemplate);
             return this;
         }

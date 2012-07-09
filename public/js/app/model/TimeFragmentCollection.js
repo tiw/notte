@@ -1,8 +1,9 @@
 define(['app/model/TimeFragment'], function(TimeFragment) {
     var TimeFragmentCollection = Backbone.Collection.extend({
         model: TimeFragment,
-        url: 'time-fragment/index/format/json',
+        url: 'api/timefragment',
         parse: function(resp) {
+            console.log(resp);
             var timeFragments = [];
             data = resp.data;
             _.each(data, function(d, index) {

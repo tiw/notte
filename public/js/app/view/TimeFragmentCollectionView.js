@@ -55,16 +55,8 @@ define(['app/model/TimeFragment', 'app/model/TimeFragmentCollection', 'app/view/
             this.currentTimeFragment.set({endTime: currentTime});
             var timeFragment =
                 new TimeFragment(this.currentTimeFragment.toJSON());
-            timeFragment.save(
-                timeFragment,
-                {
-                    success: function(model, resp) {
-                        console.log('saved', model, resp);
-                    }
-                }
-            );
-            this.timeFragmentCollection.add(timeFragment);
-            this.currentTimeFragment.set({startTime: currentTime});
+            var that = this;
+            timeFragment.save(timeFragment);
         },
         changeNode: function() {
             //console.log('change note');

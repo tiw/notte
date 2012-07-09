@@ -69,10 +69,14 @@ return array(
 
         'mysql' => array(
                 'driver'   => 'mysql',
-                'host'     => getenv('MYSQL_DB_HOST'),
-                'database' => getenv('MYSQL_DB_NAME'),
-                'username' => getenv('MYSQL_USERNAME'),
-                'password' => getenv('MYSQL_PASSWORD'),
+                //'host'     => getenv('MYSQL_DB_HOST'),
+                //'database' => getenv('MYSQL_DB_NAME'),
+                //'username' => getenv('MYSQL_USERNAME'),
+                //'password' => getenv('MYSQL_PASSWORD'),
+                'host'     => 'localhost',
+                'database' => 'notte',
+                'username' => 'root',
+                'password' => 'root',
                 'charset'  => 'utf8',
                 'prefix'   => '',
         ),
