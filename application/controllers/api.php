@@ -26,8 +26,8 @@ class Api_Controller extends Base_Controller
         $timeFragment = new Timefragment();
         //todo: get user info from auht identity
         $timeFragment->user_id = 1;
-        $timeFragment->project = isset($json->project) ? $json->project : '';
-        $timeFragment->note = $json->note;
+        $timeFragment->note = isset($json->note) ? $json->note : '';
+        $timeFragment->project = $json->project;
         $timeFragment->start_time = $json->startTime;
         $timeFragment->end_time = $json->endTime;
         try {
