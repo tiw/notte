@@ -4,6 +4,9 @@ define(['app/model/TimeFragment', 'text!templates/time-fragment/time-fragment-li
         tagName: 'tr',
         className: 'time-fragment-line',
         template: _.template(lineTemplate),
+        initialize: function() {
+            this.model.bind('destroy', this.remove, this);
+        },
         render: function() {
                 var compiledTemplate = this.template(this.model.toJSON());
                 $(this.el).html(compiledTemplate);
@@ -14,6 +17,12 @@ define(['app/model/TimeFragment', 'text!templates/time-fragment/time-fragment-li
         },
         deleteModel: function () {
             this.model.destroy({data: {id: this.model.get('id')}});
+        },
+        remove: function() {
+            var thisEl = $(this.el);
+            $(this.el).slideUp(null, function() {
+                thisEl.remove();
+            });
         }
     });
     return TimeFragmentView;

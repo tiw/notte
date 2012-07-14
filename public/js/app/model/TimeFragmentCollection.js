@@ -1,7 +1,13 @@
 define(['app/model/TimeFragment'], function(TimeFragment) {
     var TimeFragmentCollection = Backbone.Collection.extend({
         model: TimeFragment,
-        url: 'api/timefragment',
+        url: function() {
+            //if (this.model.get('id') > 0) {
+                //return 'api/timefragment/' + this.model.get('id');
+            //} else {
+                return 'api/timefragment';
+            //}
+        },
         parse: function(resp) {
             var timeFragments = [];
             _.each(resp, function(d, index) {

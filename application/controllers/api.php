@@ -22,11 +22,11 @@ class Api_Controller extends Base_Controller
 
     public function delete_timefragment()
     {
-        $json = Input::json();
-        var_dump($json);die;
-
-        echo json_encode($json);
+        $id = Input::get('id');
+        $timefragment = Timefragment::find($id);
+        $timefragment->delete();
     }
+
     public function post_timefragment()
     {
         $json = Input::json();
