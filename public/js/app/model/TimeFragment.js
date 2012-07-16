@@ -8,7 +8,10 @@ define(['order!lib/underscore', 'order!lib/backbone'], function() {
                 return 'api/timefragment';
             }
         },
-        defaults: {note: ''},
+        defaults: {
+            note: '',
+            mode: 'view'
+        },
         parse: function(data) {
             console.log(data);
             return new TimeFragment({
