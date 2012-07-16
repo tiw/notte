@@ -1,0 +1,5 @@
+<td><input type="TEXT" name="time" value="<%= startTime.toString('HH:mm') %> - <%= endTime.toString('HH:mm') %>"></input> </td>
+<td><input type="TEXT" name="project" value="<%= project %>" ></input></td>
+<td> <textarea name="note"><%= note %></textarea></td>
+<td><%= Math.round(startTime.diffMinutes(endTime)) %></td>
+<td><a class="btn save-ft">Save</i></a></td>
