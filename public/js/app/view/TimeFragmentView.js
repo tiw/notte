@@ -33,9 +33,17 @@ define(['app/model/TimeFragment', 'text!templates/time-fragment/time-fragment-li
         updateModel: function() {
             console.log('updateModel');
             // todo: following should be in callback
-            this.model.set({mode: 'view'});
-            this.changeMode();
-
+            this.model.set({
+                mode: 'view',
+                project: this.$('input[name="project"]').val(),
+                note: this.$('input[name="note"]').val()
+            });
+            var that = this;
+            this.model.save(this.model, {
+                success: function() {
+                    that.changeMode();
+                }
+            });
         },
         editModel: function() {
             this.model.set({mode: 'edit'});

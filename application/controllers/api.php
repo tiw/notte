@@ -16,7 +16,12 @@ class Api_Controller extends Base_Controller
 
     public function put_timefragment()
     {
-        echo "put";
+        $tf = Input::json();
+        $timefragment = Timefragment::find($tf->id);
+        $timefragment->note = $tf->note;
+        $timefragment->project = $tf->project;
+        $timefragment->save();
+        echo json_encode($tf);
     }
 
 
