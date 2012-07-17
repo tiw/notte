@@ -20,6 +20,8 @@ class Api_Controller extends Base_Controller
         $timefragment = Timefragment::find($tf->id);
         $timefragment->note = $tf->note;
         $timefragment->project = $tf->project;
+        $timefragment->start_time = $tf->startTime;
+        $timefragment->end_time = $tf->endTime;
         $timefragment->save();
         echo json_encode($tf);
     }

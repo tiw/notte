@@ -9,15 +9,22 @@ define(['app/model/TimeFragment'], function(TimeFragment) {
             //}
         },
         parse: function(resp) {
-            var timeFragments = [];
+            var timeFragments = [],
+                xd = new XDate(),
+                offset = -xd.getTimezoneOffset() / 60;
             _.each(resp, function(d, index) {
+                var startTime = new XDate(d.start_time),
+                    endTime = new XDate(d.end_time);
+                startTime.addHours(offset);
+                endTime.addHours(offset);
                 var tf = new TimeFragment({
                     id: d.id,
                     project: d.project,
-                    startTime: XDate(d.start_time),
-                    endTime: XDate(d.end_time),
+                    startTime: startTime,
+                    endTime: endTime,
                     note: d.note
                 });
+                console.log(tf.get('startTime').getUTCMode());
                 timeFragments[index] = tf;
             });
             return timeFragments;

@@ -32,11 +32,22 @@ define(['app/model/TimeFragment', 'text!templates/time-fragment/time-fragment-li
         },
         updateModel: function() {
             console.log('updateModel');
-            // todo: following should be in callback
+            var startTime = this.model.get('startTime'),
+                endTime = this.model.get('endTime');
+            var readableTime = this.$('input[name="time"]').val();
+            var timePattern = /(\d\d):(\d\d) - (\d\d):(\d\d)/;
+            var match = timePattern.exec(readableTime);
+            startTime.setHours(match[1]);
+            startTime.setMinutes(match[2]);
+            endTime.setHours(match[3]);
+            endTime.setMinutes(match[4]);
+
             this.model.set({
+                startTime: startTime,
+                endTime: endTime,
                 mode: 'view',
                 project: this.$('input[name="project"]').val(),
-                note: this.$('input[name="note"]').val()
+                note: this.$('textarea[name="note"]').val()
             });
             var that = this;
             this.model.save(this.model, {
