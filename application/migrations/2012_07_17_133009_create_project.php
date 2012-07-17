@@ -1,6 +1,6 @@
 <?php
 
-class Create_Time_Fragment {
+class Create_Project {
 
     /**
      * Make changes to the database.
@@ -9,13 +9,11 @@ class Create_Time_Fragment {
      */
     public function up()
     {
-        Schema::create('time_fragment', function($table) {
+        Schema::create('project', function($table) {
             $table->increments('id');
             $table->integer('user_id');
-            $table->string('project', 320);
-            $table->timestamp('start_time');
-            $table->timestamp('end_time');
-            $table->text('note');
+            $table->string('name', 320);
+            $table->text('description');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
         });
@@ -28,7 +26,7 @@ class Create_Time_Fragment {
      */
     public function down()
     {
-        Schema::drop('time_fragment');
+        Schema::drop('project');
     }
 
 }

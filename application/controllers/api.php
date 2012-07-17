@@ -4,9 +4,27 @@ class Api_Controller extends Base_Controller
 {
     public $restful = true;
 
+
+
+    public function get_project()
+    {
+        $projects = Project::where('user_id', '=', 1)->get();
+        $flatProjects = array();
+        foreach ($projects as $project) {
+            $flatProjects[] = $project->to_array();
+        }
+        echo json_encode($flatProjects);
+    }
+
     public function get_timefragment()
     {
-        $timefragments = Timefragment::where('user_id' , '=', 1)->get();
+        $startOfTheDay = time();
+        $endOfTheDay = time();
+        $timefragments = Timefragment::where('user_id' , '=', 1)
+            //->where('start_time', '>', $startOfTheDay)
+            //->where('end_time', '<', $endOfTheDay)
+            ->get();
+        // filter time
         $flatTimefragments = array();
         foreach ($timefragments as $timefragment) {
             $flatTimefragments[] = $timefragment->to_array();
